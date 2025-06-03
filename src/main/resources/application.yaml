@@ -3,6 +3,9 @@ app:
     target-topic: writeBills
     server: financial-tracker-kafka:9092
 spring:
+  metrics:
+    tags:
+      application: expense-writer
   flyway:
     enabled: false
   datasource:
@@ -16,3 +19,17 @@ spring:
 logging:
   level:
     org.jooq: DEBUG
+
+server:
+  port: 8080
+
+management:
+  server:
+    port: 2115
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
+  endpoint:
+    prometheus:
+      enabled: true
